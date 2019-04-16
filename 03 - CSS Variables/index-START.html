@@ -16,12 +16,31 @@
 
     <label for="base">Base Color</label>
     <input id="base" type="color" name="base" value="#ffc600">
+    
+    <label for="size">Image Size</label>
+    <input id="size" type="range" name="size" min="10" max="60" value="40" data-sizing="rem">
   </div>
 
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
 
+    :root{
+      /* Define CSS variables */
+      --base: #ffc600;
+      --spacing: 10px;
+      --blur: 10px;
+      --size: 100%;
+    }
+    img{
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+      height:var(--size);
+    }
+    .hl{
+      color: var(--base);
+    }
     /*
       misc styles, nothing to do with CSS variables
     */
@@ -45,6 +64,18 @@
   </style>
 
   <script>
+
+    const inputs = document.querySelectorAll('.controls input');
+
+    function handleUpdate(){
+        const suffix = this.dataset.sizing || ''; 
+        document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+
+        console.log(this.dataset);
+    }
+    inputs.forEach(input => input.addEventListener('change', handleUpdate));
+    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+    
   </script>
 
 </body>
