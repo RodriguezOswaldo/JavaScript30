@@ -7,6 +7,21 @@
 </head>
 <body>
 <script>
+  const pressed =[];
+  const secretCode = 'owner';
+window.addEventListener('keyup', (e)=>{
+  console.log(e.key);
+  pressed.push(e.key);
+  pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length);
+  if(pressed.join('').includes(secretCode)){
+    console.log('Ding Ding');
+    cornify_add();
+  }
+  console.log(pressed);
+})
+// window.addEventListener('keyup', (e)=>{ this little function will print to the console what key was pressed 
+//   console.log(e.key);
+// })
 </script>
 </body>
 </html>
