@@ -69,10 +69,14 @@
       }).join('');
     }
     function toggleDone(e){
-      if(e.target.matches('input')) return;//Skip this unless it's an input
-      console.log(e.target);
-
+      if(!e.target.matches('input')) return;//Skip this unless it's an input
+      const el = e.target;
+      const index = el.dataset.index;
+      items[index].done = !items[index].done;
+      localStorage.setItem('items', JSON.stringify(items));
+      populateList(items, itemsList);
     }
+
     addItems.addEventListener('submit', addItem); //submit form event
     itemsList.addEventListener('click', toggleDone); //submit form event
     populateList(items, itemsList);
